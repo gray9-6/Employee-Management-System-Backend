@@ -20,14 +20,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the packaged JAR file from the build stage into the container
-COPY --from=build /app/target/Employee-Management-System-0.0.1-SNAPSHOT.jar .
+COPY --from=build /app/target/*.jar app.jar
 
 # Expose the port that Spring Boot app will run on (default is 8080)
 EXPOSE 8080
 
 # Set the entry point to run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "Employee-Management-System-0.0.1-SNAPSHOT.jar"]
-
-
-
-
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
